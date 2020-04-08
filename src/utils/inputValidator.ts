@@ -6,28 +6,23 @@ import { ICreateAccountArgs } from '../graphql/resolvers/userResolver';
 export function validateInput(args: ICreateAccountArgs) {
   interface Error {
     msg: string;
+    field: string;
   }
 
-  interface Errors {
-    email?: Error;
-    password?: Error;
-    url?: Error;
-    username?: Error;
-  }
-
-  const err: Errors = {};
+  const errors: Array<Error> = [];
 
   const { email, password, url, username } = args.userDetails;
 
-  if (!validate(email) || !email) err.email = { msg: 'Invalid Email' };
+  if (!validate(email) || !email)
+    errors.push({ msg: 'Invalid Email.', field: 'email' });
   if (!password || password.length < 6)
-    err.password = {
-      msg: 'Password must be atleast 6 characters long or No password given',
-    };
-  if (!url) err.url = { msg: 'No URL Given' };
-  if (!username) err.username = { msg: 'Username not given' };
+    errors.push({
+      msg: 'Password Should be atleast 6 characters long.',
+      field: 'password',
+    });
+  if (!url) errors.push({ msg: 'No URL Provided.', field: 'url' });
+  if (!username)
+    errors.push({ msg: 'No Username Provided.', field: 'username' });
 
-  return {
-    err,
-  };
+  return errors;
 }

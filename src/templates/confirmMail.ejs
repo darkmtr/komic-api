@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirm Mail</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background-color: gray;
+        font-family: 'Raleway', sans-serif;
+        line-height: 1.5;
+      }
+
+      .box {
+        text-align: center;
+      }
+
+      .box a {
+        outline: none;
+        text-decoration: none;
+        border: none;
+        padding: 10px 20px;
+        color: #fff;
+        background-color: #000;
+        font-size: 1.2rem;
+        margin-top: 15px;
+      }
+
+      h3 {
+        font-weight: bold;
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+      }
+
+      .info {
+        font-weight: 300;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="box">
+      <h3>Komic - Confirm Mail</h3>
+      <p>
+        Thank you for registering. Please click on the link below to confirm
+        your email. The Link expires in <strong>7 days</strong>.
+      </p>
+      <a href=" <%= link %> ">Confirm Email</a>
+    </section>
+  </body>
+</html>

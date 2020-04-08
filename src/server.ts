@@ -4,9 +4,9 @@ import { config } from 'dotenv';
 
 import typeDefs from './graphql/typeDefs';
 import resolvers from './graphql/resolvers';
+import { sendMail } from './utils/email';
 
 config();
-console.log();
 
 const server = new ApolloServer({
   typeDefs,

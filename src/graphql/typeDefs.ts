@@ -6,7 +6,8 @@ export default gql`
   }
 
   type Mutation {
-    createAccount(userDetails: createAccountInput): AuthObject
+    createAccount(userDetails: createAccountInput): Status!
+    confirmEmail(token: String!): Status!
   }
 
   input createAccountInput {
@@ -43,5 +44,10 @@ export default gql`
   type AuthObject {
     token: String!
     profile: Profile!
+  }
+
+  type Status {
+    code: String!
+    message: String!
   }
 `;

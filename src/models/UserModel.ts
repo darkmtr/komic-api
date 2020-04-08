@@ -5,7 +5,7 @@ export interface IUser {
   username: string;
   password: string;
   email: string;
-  confirmed: string;
+  confirmed: boolean;
   createdAt: Date;
   urlSlug: {
     id: Types.ObjectId;
