@@ -1,45 +1,47 @@
 import { gql } from 'apollo-server';
 
 export default gql`
+  type Query {
+    info: String!
+  }
 
+  type Mutation {
+    createAccount(userDetails: createAccountInput): AuthObject
+  }
 
-	type Mutation {
+  input createAccountInput {
+    username: String!
+    password: String!
+    url: String!
+    email: String!
+  }
 
-		createAccount() : 
+  type URLSlug {
+    id: ID!
+    url: String!
+    createdAt: String!
+  }
 
+  type User {
+    id: ID!
+    username: String!
+    confirmed: Boolean!
+    createdAt: String!
+    urlSlug: URLSlug!
+  }
 
-	}
+  type Post {
+    id: ID!
+  }
 
-	Type URLSlug {
-		id : ID!
-		url : String!
-		createdAt : String!
-	}
-
-	Type User {
-		id : ID!
-		username : String!
-		confirmed : Boolean!
-		createdAt : String!
-		urlSlug : URLSlug!	
-	}
-
-	type Post {
-		
-	}
-
-	type Profile {
-		id : ID!
-		posts : [Post!]!
-		user : User!
-		createdAt : String!
-	}
-
-
-
-	Type AuthObject {
-		token : String!
-		profile : Profile!
-	}
-
+  type Profile {
+    id: ID!
+    posts: [Post!]!
+    user: User!
+    createdAt: String!
+  }
+  type AuthObject {
+    token: String!
+    profile: Profile!
+  }
 `;

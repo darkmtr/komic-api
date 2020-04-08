@@ -1,19 +1,11 @@
-import { ApolloServer, gql } from 'apollo-server';
+import { ApolloServer } from 'apollo-server';
 import { connect } from 'mongoose';
 import { config } from 'dotenv';
 
-config();
-const typeDefs = gql`
-  type Query {
-    info: String!
-  }
-`;
+import typeDefs from './graphql/typeDefs';
+import resolvers from './graphql/resolvers';
 
-const resolvers = {
-  Query: {
-    info: () => 'Basic',
-  },
-};
+config();
 
 const server = new ApolloServer({
   typeDefs,

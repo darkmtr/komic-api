@@ -1,7 +1,15 @@
 // eslint-disable-next-line no-unused-vars
 import { model, Schema, Document, Types } from 'mongoose';
+import { IUser } from './UserModel';
 
-export interface IPost extends Document {}
+interface IPost extends Document {
+  user: IUser;
+  title: string;
+  description: string;
+  imageUrl: string;
+  upvotes: number;
+  comment: Array<any>;
+}
 
 const postSchema = new Schema({
   user: {
@@ -18,6 +26,16 @@ const postSchema = new Schema({
   imageUrl: {
     type: String,
   },
+  upvotes: {
+    type: Number,
+    default: 0,
+  },
+  comment: [
+    {
+      type: Types.ObjectId,
+      ref: 'Comment',
+    },
+  ],
   clan: {
     type: Types.ObjectId,
     ref: 'Clan',
