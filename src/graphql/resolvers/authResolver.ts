@@ -44,8 +44,7 @@ export default {
       const token = generateAuthToken(user._id);
       const profile = await profileModel
         .findOne({ user: user._id })
-        .populate('user')
-        .populate('posts');
+        .populate('user');
       const urlSlug = await urlSlugModel.findById(profile.user.urlSlug);
       (profile.user.urlSlug as any) = urlSlug;
       return {

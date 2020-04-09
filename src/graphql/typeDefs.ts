@@ -10,6 +10,15 @@ export default gql`
     confirmEmail(token: String!): Status!
     deleteAccount(id: ID!): Status!
     login(username: String!, password: String!): AuthObject!
+    createClan(name: String!, clanSlug: String!): Clan!
+  }
+
+  type Clan {
+    id: ID!
+    name: String!
+    createdAt: String!
+    clanSlug: URLSlug!
+    moderators: [User!]!
   }
 
   input createAccountInput {

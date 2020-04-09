@@ -1,5 +1,6 @@
 import userResolver from './userResolver';
 import authResolver from './authResolver';
+import clanResolver from './clanResolver';
 
 export default {
   Query: {
@@ -8,5 +9,6 @@ export default {
   Mutation: {
     ...userResolver.Mutation,
     ...authResolver.Mutation,
+    ...clanResolver.Mutation,
   },
 };
