@@ -9,6 +9,8 @@ import profileModel from '../../models/profileModel';
 import { validateInput } from '../../utils/inputValidator';
 import { IAuthPayload } from '../../utils/authPayload';
 import { sendMail } from '../../utils/email';
+import { verifyUserToken } from '../../utils/authenticateUser';
+import { IVerfiyUser } from '../../utils/authenticateUser';
 
 export interface ICreateAccountArgs {
   userDetails: {
@@ -23,6 +25,10 @@ export interface IconfirmEmailArgs {
   token;
 }
 
+interface IDeleteAccount {
+  id: string;
+}
+
 export default {
   Mutation: {
     createAccount: async (_, args: ICreateAccountArgs) => {
@@ -34,17 +40,17 @@ export default {
         });
       }
 
+      const { email, password, url, username } = args.userDetails;
+
+      let user = await UserModel.findOne({ email });
+      if (user) throw new UserInputError('User with email already exists');
+      user = await UserModel.findOne({ username });
+      if (user) throw new UserInputError('Username is taken');
+
+      let slug = await urlSlugModel.findOne({ url });
+      if (slug) throw new UserInputError('URL is not available');
+
       try {
-        const { email, password, url, username } = args.userDetails;
-
-        let user = await UserModel.findOne({ email });
-        if (user) throw new UserInputError('User with email already exists');
-        user = await UserModel.findOne({ username });
-        if (user) throw new UserInputError('Username is taken');
-
-        let slug = await urlSlugModel.findOne({ url });
-        if (slug) throw new UserInputError('URL is not available');
-
         user = new UserModel();
         user.username = username;
         user.email = email;
@@ -83,6 +89,7 @@ export default {
           message: 'Success',
         };
       } catch (err) {
+        console.log(err);
         throw new ApolloError('Internal Server Error', err);
       }
     },
@@ -107,6 +114,27 @@ export default {
       } catch (err) {
         console.log(err);
       }
+    },
+    deleteAccount: async (_, args: IDeleteAccount, context) => {
+      const decodedUser: IVerfiyUser = verifyUserToken(context);
+
+      const { id } = decodedUser;
+      const user = await UserModel.findById(id);
+
+      if (!user) throw new UserInputError('User not found');
+
+      const profile = await profileModel.findOne({ user: user._id });
+
+      const slug = await urlSlugModel.findById(user.urlSlug);
+
+      await profile.remove();
+      await slug.remove();
+      await user.remove();
+
+      return {
+        code: 200,
+        message: 'Success',
+      };
     },
   },
 };

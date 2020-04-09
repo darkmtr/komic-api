@@ -1,4 +1,5 @@
 import userResolver from './userResolver';
+import authResolver from './authResolver';
 
 export default {
   Query: {
@@ -6,5 +7,6 @@ export default {
   },
   Mutation: {
     ...userResolver.Mutation,
+    ...authResolver.Mutation,
   },
 };

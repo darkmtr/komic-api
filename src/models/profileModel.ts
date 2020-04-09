@@ -2,7 +2,7 @@
 import { model, Schema, Document, Types } from 'mongoose';
 import { IUser } from './UserModel';
 
-interface IProfileDoc extends Document {
+export interface IProfileDoc extends Document {
   posts: Array<string>;
   user: IUser;
   createdAt: Date;
