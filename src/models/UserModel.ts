@@ -7,6 +7,7 @@ export interface IUser {
   email: string;
   confirmed: boolean;
   createdAt: Date;
+  avatar: string;
   urlSlug: {
     id: Types.ObjectId;
     url: string;
@@ -33,6 +34,9 @@ const userSchema = new Schema({
     type: Boolean,
     required: true,
     default: false,
+  },
+  avatar: {
+    type: String,
   },
   urlSlug: {
     required: true,

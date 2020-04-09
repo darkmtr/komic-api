@@ -31,6 +31,7 @@ export default gql`
     confirmed: Boolean!
     createdAt: String!
     urlSlug: URLSlug!
+    avatar: String!
   }
 
   type Post {

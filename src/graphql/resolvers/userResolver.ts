@@ -61,7 +61,7 @@ export default {
 
         await slug.save();
         user.urlSlug = slug._id;
-
+        user.avatar = `https://api.adorable.io/avatars/250/${username}@adorable.png`;
         await user.save();
 
         const profile = new profileModel();
