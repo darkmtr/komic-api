@@ -19,7 +19,7 @@ const clanSlugSchema = new Schema({
 
 export const clanSlugModel = model<IClanSlug>('CSlug', clanSlugSchema);
 
-interface IClanDoc extends Document {
+export interface IClan {
   name: string;
   clanSlug: {
     url: string;
@@ -28,6 +28,8 @@ interface IClanDoc extends Document {
   owner: IUser;
   moderators: [IUser];
 }
+
+interface IClanDoc extends Document, IClan {}
 
 const clanSchema = new Schema({
   name: {

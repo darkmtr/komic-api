@@ -25,10 +25,6 @@ export interface IconfirmEmailArgs {
   token;
 }
 
-interface IDeleteAccount {
-  id: string;
-}
-
 export default {
   Mutation: {
     createAccount: async (_, args: ICreateAccountArgs) => {
@@ -115,7 +111,7 @@ export default {
         console.log(err);
       }
     },
-    deleteAccount: async (_, args: IDeleteAccount, context) => {
+    deleteAccount: async (_, __, context) => {
       const decodedUser: IVerfiyUser = verifyUserToken(context);
 
       const { id } = decodedUser;

@@ -1,7 +1,7 @@
 import { ICreateAccountArgs } from './userResolver';
 import { verifyUserToken, IVerfiyUser } from '../../utils/authenticateUser';
 import { validateCreateClanInput } from '../../utils/inputValidator';
-import { UserInputError } from 'apollo-server';
+import { UserInputError, AuthenticationError } from 'apollo-server';
 import UserModel from '../../models/UserModel';
 import clanModel, { clanSlugModel } from '../../models/Clan';
 
@@ -48,4 +48,22 @@ export default {
       return clan;
     },
   },
+  deleteClan: async (_, args: IClanDeleteArgs, context) => {
+    const decodedUser = verifyUserToken(context);
+
+    const { id } = args;
+
+    const user = await UserModel.findById(decodedUser.id);
+
+    const clan = await clanModel.findById(id);
+
+    if (clan.owner.toString() !== user._id.toString())
+      throw new AuthenticationError(
+        'Cannot Delete Clan since user does not own it'
+      );
+  },
 };
+
+interface IClanDeleteArgs {
+  id: string;
+}

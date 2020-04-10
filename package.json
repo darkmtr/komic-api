@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "client": "npm run client --prefix frontend",
     "server": "nodemon src/server.ts",
+    "dev": "concurrently 'npm run server' 'npm run client'",
     "pretty": "prettier ./src --write"
   },
   "keywords": [],
@@ -17,6 +19,7 @@
     "@types/nodemailer": "^6.4.0",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
+    "concurrently": "^5.1.0",
     "eslint": "^6.8.0",
     "nodemon": "^2.0.2",
     "prettier": "^2.0.4",

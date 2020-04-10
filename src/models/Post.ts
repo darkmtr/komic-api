@@ -2,7 +2,7 @@
 import { model, Schema, Document, Types } from 'mongoose';
 import { IUser } from './UserModel';
 
-interface IPost extends Document {
+export interface IPost {
   user: IUser;
   title: string;
   description: string;
@@ -10,6 +10,8 @@ interface IPost extends Document {
   upvotes: number;
   comment: Array<any>;
 }
+
+interface IPostDoc extends Document, IPost {}
 
 const postSchema = new Schema({
   user: {
@@ -30,7 +32,7 @@ const postSchema = new Schema({
     type: Number,
     default: 0,
   },
-  comment: [
+  comments: [
     {
       type: Types.ObjectId,
       ref: 'Comment',
@@ -46,6 +48,6 @@ const postSchema = new Schema({
   },
 });
 
-const postModel = model<IPost>('Post', postSchema);
+const postModel = model<IPostDoc>('Post', postSchema);
 
 export default postModel;

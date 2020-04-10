@@ -8,7 +8,7 @@ export default gql`
   type Mutation {
     createAccount(userDetails: createAccountInput): Status!
     confirmEmail(token: String!): Status!
-    deleteAccount(id: ID!): Status!
+    deleteAccount: Status!
     login(username: String!, password: String!): AuthObject!
     createClan(name: String!, clanSlug: String!): Clan!
   }
