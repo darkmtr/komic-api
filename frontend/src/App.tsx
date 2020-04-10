@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 import styled from 'styled-components';
+import Router from './Router';
+import NavBar from './components/NavBar';
 
 const StyledButton = styled.button`
   border: none;
@@ -14,8 +16,8 @@ const StyledButton = styled.button`
 function App() {
   return (
     <div>
-      <h1>hello</h1>
-      <StyledButton>CLICK ME</StyledButton>
+      <NavBar />
+      <Router />
     </div>
   );
 }

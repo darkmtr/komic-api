@@ -10,6 +10,9 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'public'),
     port: 3000,
+    overlay: true,
+    publicPath: '/',
+    historyApiFallback: true,
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
@@ -26,6 +29,14 @@ module.exports = {
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
       },
     ],
   },
