@@ -3,6 +3,7 @@ import { gql } from 'apollo-server';
 export default gql`
   type Query {
     info: String!
+    checkUserSlugAvailability(url: String!): Status!
   }
 
   type Mutation {

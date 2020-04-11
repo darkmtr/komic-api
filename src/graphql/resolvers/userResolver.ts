@@ -26,6 +26,16 @@ export interface IconfirmEmailArgs {
 }
 
 export default {
+  Query: {
+    checkUserSlugAvailability: async (_, args) => {
+      const url = args.url;
+
+      const uslug = await urlSlugModel.findOne({ url });
+      if (uslug) return { code: 200, message: ' User Slug Not Available' };
+
+      return { code: 200, message: 'User Slug Available' };
+    },
+  },
   Mutation: {
     createAccount: async (_, args: ICreateAccountArgs) => {
       const errors = validateInput(args);
