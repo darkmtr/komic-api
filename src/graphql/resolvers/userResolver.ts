@@ -73,7 +73,7 @@ export default {
       if (slug)
         throw new UserInputError('URL is not available', {
           errors: {
-            email: {
+            url: {
               msg: 'Url is not available',
               field: 'url',
             },
