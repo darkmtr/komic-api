@@ -49,12 +49,36 @@ export default {
       const { email, password, url, username } = args.userDetails;
 
       let user = await UserModel.findOne({ email });
-      if (user) throw new UserInputError('User with email already exists');
+      if (user)
+        throw new UserInputError('User with email already exists', {
+          errors: {
+            email: {
+              msg: 'User with email already exists',
+              field: 'email',
+            },
+          },
+        });
       user = await UserModel.findOne({ username });
-      if (user) throw new UserInputError('Username is taken');
+      if (user)
+        throw new UserInputError('Username is taken', {
+          errors: {
+            username: {
+              msg: 'Username is already taken',
+              field: 'username',
+            },
+          },
+        });
 
       let slug = await urlSlugModel.findOne({ url });
-      if (slug) throw new UserInputError('URL is not available');
+      if (slug)
+        throw new UserInputError('URL is not available', {
+          errors: {
+            email: {
+              msg: 'Url is not available',
+              field: 'url',
+            },
+          },
+        });
 
       try {
         user = new UserModel();
