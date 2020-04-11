@@ -19,6 +19,6 @@ const server = new ApolloServer({
   } catch (err) {
     console.log('Failed to connect to database.');
   }
-  const { url } = await server.listen();
+  const { url } = await server.listen({ port: process.env.PORT || 4000 });
   console.log(`Server on : ${url}`);
 })();
