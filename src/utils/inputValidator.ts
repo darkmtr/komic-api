@@ -9,21 +9,28 @@ interface Error {
   field: string;
 }
 
+interface ErrorObject {
+  username?: Error;
+  password?: Error;
+  url?: Error;
+  email?: Error;
+}
+
 export function validateInput(args: ICreateAccountArgs) {
-  const errors: Array<Error> = [];
+  const errors: ErrorObject = {};
 
   const { email, password, url, username } = args.userDetails;
 
   if (!validate(email) || !email)
-    errors.push({ msg: 'Invalid Email.', field: 'email' });
+    errors.email = { msg: 'Invalid Email.', field: 'email' };
   if (!password || password.length < 6)
-    errors.push({
+    errors.password = {
       msg: 'Password Should be atleast 6 characters long.',
       field: 'password',
-    });
-  if (!url) errors.push({ msg: 'No URL Provided.', field: 'url' });
+    };
+  if (!url) errors.url = { msg: 'No URL Provided.', field: 'url' };
   if (!username)
-    errors.push({ msg: 'No Username Provided.', field: 'username' });
+    errors.username = { msg: 'No Username Provided.', field: 'username' };
 
   return errors;
 }

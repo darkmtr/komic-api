@@ -17,7 +17,13 @@ const server = new ApolloServer({
 
 (async () => {
   try {
-    await connect(process.env.DB_URI, { useNewUrlParser: true });
+    await connect(
+      process.env.BUILD === 'DEV'
+        ? 'mongodb://localhost:27017/komic'
+        : process.env.DB_URI,
+      { useNewUrlParser: true }
+    );
+    console.log('Connected to database');
   } catch (err) {
     console.log('Failed to connect to database.');
   }

@@ -40,7 +40,7 @@ export default {
     createAccount: async (_, args: ICreateAccountArgs) => {
       const errors = validateInput(args);
 
-      if (errors.length > 0) {
+      if (Object.keys(errors).length > 0) {
         throw new UserInputError('Error', {
           errors,
         });
@@ -88,7 +88,7 @@ export default {
           expiresIn: '7d',
         });
 
-        sendMail({ token, email });
+        // sendMail({ token, email });
 
         return {
           code: 200,
