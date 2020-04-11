@@ -8,7 +8,8 @@
     "postinstall": "tsc",
     "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
-    "pretty": "prettier ./src --write"
+    "pretty": "prettier ./src --write",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -27,16 +28,18 @@
     "ts-node": "^8.8.2"
   },
   "dependencies": {
-    "typescript": "^3.8.3",
     "@types/ejs": "^3.0.2",
     "@types/email-templates": "^6.0.3",
+    "@types/jest": "^25.2.1",
     "apollo-server": "^2.12.0",
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "ejs": "^3.0.2",
     "email-validator": "^2.0.4",
+    "jest": "^25.3.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.7",
-    "nodemailer": "^6.4.6"
+    "nodemailer": "^6.4.6",
+    "typescript": "^3.8.3"
   }
 }

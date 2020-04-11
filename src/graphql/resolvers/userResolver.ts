@@ -108,15 +108,14 @@ export default {
           },
         };
 
-        const token = sign(payload, process.env.EMAIL_CONFIRM_SECRET, {
+        const token = sign(payload, process.env.JWT_AUTH_SECRET, {
           expiresIn: '7d',
         });
 
         // sendMail({ token, email });
-
         return {
-          code: 200,
-          message: 'Success',
+          token,
+          profile,
         };
       } catch (err) {
         console.log(err);

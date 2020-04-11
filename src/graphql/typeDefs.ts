@@ -7,7 +7,7 @@ export default gql`
   }
 
   type Mutation {
-    createAccount(userDetails: createAccountInput): Status!
+    createAccount(userDetails: createAccountInput): AuthObject!
     confirmEmail(token: String!): Status!
     deleteAccount: Status!
     login(username: String!, password: String!): AuthObject!
