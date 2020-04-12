@@ -10,7 +10,7 @@ test('Info Query ', async () => {
 		}`,
   };
 
-  const res = await axios.post('http://localhost:4000', req);
+  const res = await axios.post('https://komic-api.herokuapp.com/', req);
 
   const { data } = res;
   expect(data.data.info).toBe('Hi');
