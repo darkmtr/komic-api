@@ -46,6 +46,7 @@ export default gql`
 
   type Post {
     id: ID!
+    title: String!
   }
 
   type Profile {
