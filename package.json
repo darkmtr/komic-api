@@ -9,6 +9,7 @@
     "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
     "pretty": "prettier ./src --write",
+    "build": "tsc",
     "test": "jest"
   },
   "keywords": [],
