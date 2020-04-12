@@ -4,6 +4,7 @@ export default gql`
   type Query {
     info: String!
     checkUserSlugAvailability(url: String!): Status!
+    getMe: Profile!
   }
 
   type Mutation {

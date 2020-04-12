@@ -35,6 +35,23 @@ export default {
 
       return { code: 200, message: 'User Slug Available' };
     },
+    getMe: async (_, __, context) => {
+      const decodedUser: IVerfiyUser = verifyUserToken(context);
+
+      const user = await UserModel.findById(decodedUser.id);
+
+      if (!user) throw new UserInputError('User not found');
+
+      const profile = await profileModel
+        .findOne({ user: user._id })
+        .populate('user');
+
+      const url = await urlSlugModel.findById(profile.user.urlSlug);
+      (profile.user.urlSlug as any) = url;
+      console.log(profile);
+
+      return profile;
+    },
   },
   Mutation: {
     createAccount: async (_, args: ICreateAccountArgs) => {
