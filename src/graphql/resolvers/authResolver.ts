@@ -36,8 +36,7 @@ export default {
 
       if (!user) throw new AuthenticationError('Invalid Username or password');
 
-      const isMatch: Promise<boolean> = compare(password, user.password);
-
+      const isMatch = await compare(password, user.password);
       if (!isMatch)
         throw new AuthenticationError('Invalid Username or password');
 
